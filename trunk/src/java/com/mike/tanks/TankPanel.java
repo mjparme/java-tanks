@@ -23,13 +23,12 @@ public class TankPanel extends JPanel implements Runnable {
     private final static Logger logger = Logger.getLogger(TankPanel.class);
 
     private final static long PERIOD = 41 * 1000000L;
-    private static final int NO_DELAYS_PER_YIELD = 16;
-    /* Number of frames with a delay of 0 ms before the
-       animation thread yields to other running threads. */
 
+    //Number of frames with a delay of 0 ms before the animation thread yields to other running threads
+    private static final int NO_DELAYS_PER_YIELD = 16;
+
+    //Number of frames that can be skipped in any one animation loop i.e the games state is updated but not rendered
     private static int MAX_FRAME_SKIPS = 5;
-    // no. of frames that can be skipped in any one animation loop
-    // i.e the games state is updated but not rendered
 
     private static final int PWIDTH = 500;
     private static final int PHEIGHT = 400;
@@ -93,7 +92,8 @@ public class TankPanel extends JPanel implements Runnable {
             // some time left in this cycle
             if (sleepTime > 0) {
                 try {
-                    Thread.sleep(sleepTime / 1000000L);  // nano -> ms
+                    //Nano -> ms
+                    Thread.sleep(sleepTime / 1000000L);
                 } catch (InterruptedException ex) {
                     logger.error("Exception: ", ex);
                 }
@@ -106,7 +106,8 @@ public class TankPanel extends JPanel implements Runnable {
                 overSleepTime = 0L;
 
                 if (++noDelays >= NO_DELAYS_PER_YIELD) {
-                    Thread.yield();   // give another thread a chance to run
+                    //Give another thread a chance to run
+                    Thread.yield();
                     noDelays = 0;
                 }
             }
@@ -114,7 +115,8 @@ public class TankPanel extends JPanel implements Runnable {
             int skips = 0;
             while ((excess > PERIOD) && (skips < MAX_FRAME_SKIPS)) {
                 excess -= PERIOD;
-                this.gameUpdate();      // update state but don't render
+                //Update state but don't render
+                this.gameUpdate();
                 skips++;
             }
         }

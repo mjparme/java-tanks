@@ -2,6 +2,9 @@ package com.mike.tanks;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
 
 /**
  * User: mjparme
@@ -9,18 +12,23 @@ import java.awt.*;
  * Time: 10:26:03 AM
  */
 public class Tanks {
-    private JFrame frame;
-
     public Tanks() {
         constructGui();
     }
 
     private void constructGui() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.add(new TankPanel(), BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     public static void main(String[] args) {
