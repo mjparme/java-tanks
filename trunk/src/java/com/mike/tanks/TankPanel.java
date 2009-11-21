@@ -15,7 +15,7 @@ import com.mike.tanks.sprites.TankSprite;
  * User: mjparme
  * Date: Aug 14, 2009
  * Time: 2:15:38 PM
- *
+ * <p/>
  * Almost all of this class was taken from Killer Game Programming in Java
  * http://fivedots.coe.psu.ac.th/~ad/jg/
  */
@@ -43,7 +43,7 @@ public class TankPanel extends JPanel implements Runnable {
     private TankSprite player1Tank;
 
     public TankPanel() {
-        setBackground(Color.white);    // white background
+        setBackground(Color.white);
         setPreferredSize(new Dimension(PWIDTH, PHEIGHT));
 
         setFocusable(true);
@@ -54,11 +54,10 @@ public class TankPanel extends JPanel implements Runnable {
     }
 
     public void addNotify() {
-        super.addNotify();   // creates the peer
-        this.startGame();         // start the thread
+        super.addNotify();
+        this.startGame();
     }
 
-    // initialise and start the thread
     private void startGame() {
         if (this.animator == null || !this.running) {
             this.animator = new Thread(this);
@@ -66,7 +65,6 @@ public class TankPanel extends JPanel implements Runnable {
         }
     }
 
-    // called by the user to stop execution
     public void stopGame() {
         this.running = false;
     }
@@ -124,9 +122,9 @@ public class TankPanel extends JPanel implements Runnable {
         System.exit(0);
     }
 
-    // draw the current frame to an image buffer
     private void gameRender() {
-        if (this.dbImage == null) {  // create the buffer
+        // draw the current frame to an image buffer
+        if (this.dbImage == null) {
             this.dbImage = createImage(PWIDTH, PHEIGHT);
             if (this.dbImage == null) {
                 System.out.println("dbImage is null");
@@ -142,7 +140,7 @@ public class TankPanel extends JPanel implements Runnable {
 
         this.player1Tank.drawSprite(this.dbg);
         if (this.gameOver) {
-            this.gameOverMessage(this.dbg);
+
         }
     }
 
@@ -153,14 +151,6 @@ public class TankPanel extends JPanel implements Runnable {
         }
     }
 
-    // center the game-over message
-    private void gameOverMessage(Graphics g) {
-        String message = "Game Over!";
-        int x = 0;
-        int y = 0;
-        g.drawString(message, x, y);
-    }
-
     public void pauseGame() {
         this.isPaused = true;
     }
@@ -169,15 +159,17 @@ public class TankPanel extends JPanel implements Runnable {
         this.isPaused = false;
     }
 
-    // actively render the buffer image to the screen
     private void paintScreen() {
+        // actively render the buffer image to the screen
         Graphics g;
         try {
             g = this.getGraphics();
             if ((g != null) && (this.dbImage != null)) {
                 g.drawImage(this.dbImage, 0, 0, null);
             }
-            Toolkit.getDefaultToolkit().sync();  // sync the display on some systems
+
+            //Sync the display on some systems
+            Toolkit.getDefaultToolkit().sync();
             if (g != null) {
                 g.dispose();
             }
