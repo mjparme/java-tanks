@@ -15,6 +15,9 @@ import com.mike.tanks.sprites.TankSprite;
  * User: mjparme
  * Date: Aug 14, 2009
  * Time: 2:15:38 PM
+ *
+ * Almost all of this class was taken from Killer Game Programming in Java
+ * http://fivedots.coe.psu.ac.th/~ad/jg/
  */
 public class TankPanel extends JPanel implements Runnable {
     private final static Logger logger = Logger.getLogger(TankPanel.class);
