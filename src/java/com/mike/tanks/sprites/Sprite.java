@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.image.*;
 
 
+/**
+ * This class was taken from Killer Game Programming in Java
+ * http://fivedots.coe.psu.ac.th/~ad/jg/
+ */
 public abstract class Sprite {
     private static final int SIZE = 12;
 
