@@ -8,13 +8,12 @@ import java.awt.image.*;
  * This class was taken from Killer Game Programming in Java
  * http://fivedots.coe.psu.ac.th/~ad/jg/
  */
-public abstract class Sprite {
+public abstract class AbstractSprite {
     private static final int SIZE = 12;
 
-    private String imageName;
     private BufferedImage image;
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
 
     protected int panelWidth;
     protected int panelHeight;
@@ -26,27 +25,26 @@ public abstract class Sprite {
     protected int deltaX;
     protected int deltaY;
 
-    public Sprite() {
+    public AbstractSprite() {
         this.deltaX = 0;
         this.deltaY = 0;
     }
 
-    public Sprite(int x, int y, int width, int height, String name) {
+    public AbstractSprite(int x, int y, int width, int height, BufferedImage image) {
         this();
         this.x = x;
         this.y = y;
         this.panelWidth = width;
         this.panelHeight = height;
-        this.setImage(name);
+        this.setImage(image);
     }
 
-    public void setImage(String name) {
-        this.imageName = name;
-        if (this.image == null) {
-            System.out.println("No sprite image for " + this.imageName);
+    public void setImage(BufferedImage image) {
+        if (image == null) {
             this.width = SIZE;
             this.height = SIZE;
         } else {
+            this.image = image;
             this.width = this.image.getWidth();
             this.height = this.image.getHeight();
         }

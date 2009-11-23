@@ -10,6 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.mike.tanks.sprites.TankSprite;
+import com.mike.tanks.ImageLoader;
+import com.mike.tanks.Images;
+import com.mike.tanks.movement.Direction;
+import com.mike.tanks.movement.ArrowMovementKeyAdapter;
+import com.mike.tanks.movement.IListenForArrowDirection;
 
 /**
  * User: mjparme
@@ -40,6 +45,7 @@ public class TankPanel extends JPanel implements Runnable {
     private Graphics dbg;
     private Image dbImage;
     private TankSprite player1Tank;
+    private ImageLoader imageLoader;
 
     public TankPanel() {
         setBackground(Color.white);
@@ -47,9 +53,12 @@ public class TankPanel extends JPanel implements Runnable {
 
         setFocusable(true);
         requestFocus();
-        addKeyListener(new TankKeyAdapter());
+        final ArrowMovementKeyAdapter movementKeyAdapter = new ArrowMovementKeyAdapter();
+        addKeyListener(movementKeyAdapter);
+        movementKeyAdapter.addArrowDirectionListener(new TankMovement());
 
-        this.player1Tank = new TankSprite(PWIDTH, PHEIGHT);
+        this.imageLoader = new ImageLoader();
+        this.player1Tank = new TankSprite(PWIDTH, PHEIGHT, this.imageLoader.getImage(Images.TANK.getImageName()));
     }
 
     public void addNotify() {
@@ -129,7 +138,6 @@ public class TankPanel extends JPanel implements Runnable {
         if (this.dbImage == null) {
             this.dbImage = createImage(PWIDTH, PHEIGHT);
             if (this.dbImage == null) {
-                System.out.println("dbImage is null");
                 return;
             } else {
                 this.dbg = this.dbImage.getGraphics();
@@ -180,71 +188,18 @@ public class TankPanel extends JPanel implements Runnable {
         }
     }
 
-    /**
-     * Controls tank movement. Tanks can move in two directions at once (down/right, up/left, etc) so we have to
-     * keep track of keys that have been pressed but not released
-     */
-    private class TankKeyAdapter extends KeyAdapter {
-        private Set<Integer> pressedKeys;
-
-        private TankKeyAdapter() {
-            this.pressedKeys = new HashSet<Integer>();
+    private class TankMovement implements IListenForArrowDirection {
+        public void handleStopXMovement() {
+            player1Tank.stopXMovement();
         }
 
-        public void keyPressed(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-            switch (keyCode) {
-                case KeyEvent.VK_ESCAPE:
-                    running = false;
-                    break;
-                case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_UP:
-                case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_RIGHT:
-                    pressedKeys.add(keyCode);
-                    break;
-            }
+        public void handleStopYMovement() {
+            player1Tank.stopYMovement();
 
-            this.setTankMovementState();
         }
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-            pressedKeys.remove(e.getKeyCode());
-            this.setTankMovementState();
-        }
-
-        public void setTankMovementState() {
-            if (pressedKeys.isEmpty()) {
-                player1Tank.stopTank();
-            } else {
-                //Stop any delta for directions we aren't moving anymore
-                if (!pressedKeys.contains(KeyEvent.VK_LEFT) && !pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-                    player1Tank.stopXMovement();
-                }
-
-                if (!pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)) {
-                    player1Tank.stopYMovement();
-                }
-
-                //Set movement for any keys that are pressed
-                for (Integer pressedKey : pressedKeys) {
-                    switch (pressedKey) {
-                        case KeyEvent.VK_DOWN:
-                            player1Tank.moveTankDown();
-                            break;
-                        case KeyEvent.VK_UP:
-                            player1Tank.moveTankUp();
-                            break;
-                        case KeyEvent.VK_LEFT:
-                            player1Tank.moveTankLeft();
-                            break;
-                        case KeyEvent.VK_RIGHT:
-                            player1Tank.moveTankRight();
-                            break;
-                    }
-                }
-            }
+        public void handleMovement(Direction direction) {
+            player1Tank.moveTank(direction);
         }
     }
 }

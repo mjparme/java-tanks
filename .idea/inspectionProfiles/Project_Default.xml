@@ -1,0 +1,70 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="BreakStatementWithLabel" level="WARNING" enabled="true" />
+    <inspection_tool class="CStyleArrayDeclaration" level="WARNING" enabled="true" />
+    <inspection_tool class="CallToSimpleGetterInClass" level="WARNING" enabled="true">
+      <option name="ignoreGetterCallsOnOtherObjects" value="false" />
+    </inspection_tool>
+    <inspection_tool class="CallToSimpleSetterInClass" level="WARNING" enabled="true">
+      <option name="ignoreSetterCallsOnOtherObjects" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ChannelResource" level="WARNING" enabled="true" />
+    <inspection_tool class="ConfusingElse" level="WARNING" enabled="true" />
+    <inspection_tool class="ContinueStatementWithLabel" level="WARNING" enabled="true" />
+    <inspection_tool class="ControlFlowStatementWithoutBraces" level="WARNING" enabled="true" />
+    <inspection_tool class="DuplicateBooleanBranch" level="WARNING" enabled="true" />
+    <inspection_tool class="DuplicateCondition" level="WARNING" enabled="true">
+      <option name="ignoreMethodCalls" value="false" />
+    </inspection_tool>
+    <inspection_tool class="EnumSwitchStatementWhichMissesCases" level="WARNING" enabled="true">
+      <option name="ignoreSwitchStatementsWithDefault" value="false" />
+    </inspection_tool>
+    <inspection_tool class="EqualsAndHashcode" level="WARNING" enabled="true" />
+    <inspection_tool class="FallthruInSwitchStatement" level="WARNING" enabled="true" />
+    <inspection_tool class="ForLoopReplaceableByWhile" level="WARNING" enabled="true">
+      <option name="m_ignoreLoopsWithoutConditions" value="true" />
+    </inspection_tool>
+    <inspection_tool class="IfStatementWithIdenticalBranches" level="WARNING" enabled="true" />
+    <inspection_tool class="InnerClassMayBeStatic" level="WARNING" enabled="true" />
+    <inspection_tool class="InstanceofCatchParameter" level="WARNING" enabled="true" />
+    <inspection_tool class="KeySetIterationMayUseEntrySet" level="WARNING" enabled="true" />
+    <inspection_tool class="LabeledStatement" level="WARNING" enabled="true" />
+    <inspection_tool class="LengthOneStringInIndexOf" level="WARNING" enabled="true" />
+    <inspection_tool class="LengthOneStringsInConcatenation" level="WARNING" enabled="true" />
+    <inspection_tool class="LiteralAsArgToStringEquals" level="WARNING" enabled="true" />
+    <inspection_tool class="LoggerInitializedWithForeignClass" level="WARNING" enabled="true">
+      <option name="loggerClassName" value="org.apache.log4j.Logger" />
+      <option name="loggerFactoryMethodName" value="getLogger" />
+    </inspection_tool>
+    <inspection_tool class="LoggingConditionDisagreesWithLogStatement" level="WARNING" enabled="true" />
+    <inspection_tool class="LoopConditionNotUpdatedInsideLoop" level="WARNING" enabled="true">
+      <option name="ignoreIterators" value="false" />
+    </inspection_tool>
+    <inspection_tool class="MultipleDeclaration" level="WARNING" enabled="true" />
+    <inspection_tool class="NonStaticFinalLogger" level="WARNING" enabled="true">
+      <option name="loggerClassName" value="java.util.logging.Logger" />
+    </inspection_tool>
+    <inspection_tool class="ObjectToString" level="WARNING" enabled="true" />
+    <inspection_tool class="RedundantFieldInitialization" level="WARNING" enabled="true" />
+    <inspection_tool class="RedundantImplements" level="WARNING" enabled="true" />
+    <inspection_tool class="ResultSetIndexZero" level="WARNING" enabled="true" />
+    <inspection_tool class="SetReplaceableByEnumSet" level="WARNING" enabled="true" />
+    <inspection_tool class="SizeReplaceableByIsEmpty" level="WARNING" enabled="true">
+      <option name="ignoreNegations" value="false" />
+    </inspection_tool>
+    <inspection_tool class="StringBufferReplaceableByStringBuilder" level="WARNING" enabled="true" />
+    <inspection_tool class="StringBufferToStringInConcatenation" level="WARNING" enabled="true" />
+    <inspection_tool class="StringEqualsEmptyString" level="WARNING" enabled="true" />
+    <inspection_tool class="StringReplaceableByStringBuffer" level="WARNING" enabled="true">
+      <option name="onlyWarnOnLoop" value="true" />
+    </inspection_tool>
+    <inspection_tool class="SubstringZero" level="WARNING" enabled="true" />
+    <inspection_tool class="TextLabelInSwitchStatement" level="WARNING" enabled="true" />
+    <inspection_tool class="UnusedLibrary" level="WARNING" enabled="true" />
+    <inspection_tool class="UnusedProperty" level="WARNING" enabled="true" />
+    <inspection_tool class="UseOfSunClasses" level="WARNING" enabled="true" />
+    <inspection_tool class="NullArgumentToVariableArgMethod" level="WARNING" enabled="false" />
+  </profile>
+</component>
