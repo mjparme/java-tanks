@@ -10,15 +10,16 @@ import java.awt.image.BufferedImage;
  * Time: 3:45:33 PM
  */
 public class BulletSprite extends AbstractSprite {
-    public BulletSprite(int x, int y, int gamePanelWidth, int gamePanelHeight, BufferedImage image, Direction tankDirection) {
+    public BulletSprite(int x, int y, int gamePanelWidth, int gamePanelHeight, BufferedImage image, Direction startingDirection) {
         super(x, y, gamePanelWidth, gamePanelHeight, image);
-        currentDirection = tankDirection;
+        currentDirection = startingDirection;
         stepSize = 4;
+        moveSprite(startingDirection);
     }
 
     @Override
     public void updateSprite() {
-        moveSprite(currentDirection);
+        System.out.println("deltaX = " + deltaX + " deltaY = " + deltaY);
         super.updateSprite();
     }
 }
