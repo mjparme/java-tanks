@@ -3,8 +3,6 @@ package com.mike.tanks;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -208,7 +206,7 @@ public class TankPanel extends JPanel implements Runnable {
     }
 
     private void tankFires() {
-        BulletSprite bullet = new BulletSprite(player1Tank.getX(), player1Tank.getY(), PWIDTH, PHEIGHT, null);
+        BulletSprite bullet = new BulletSprite(player1Tank.getX(), player1Tank.getY(), PWIDTH, PHEIGHT, null, player1Tank.getCurrentDirection());
         bullets.add(bullet);
     }
 
@@ -223,7 +221,7 @@ public class TankPanel extends JPanel implements Runnable {
         }
 
         public void handleMovement(Direction direction) {
-            player1Tank.moveTank(direction);
+            player1Tank.moveSprite(direction);
         }
 
         public void fire() {
