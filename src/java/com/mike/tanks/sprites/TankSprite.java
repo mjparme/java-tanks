@@ -18,6 +18,7 @@ public class TankSprite extends AbstractSprite {
         super(0, 0, panelWidth, panelHeight, image);
         this.currentDirection = Direction.NORTH;
         this.transform = new AffineTransform();
+        stepSize = 3;
     }
 
     @Override

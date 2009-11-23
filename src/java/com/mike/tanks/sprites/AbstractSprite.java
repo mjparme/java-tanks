@@ -14,7 +14,7 @@ public abstract class AbstractSprite {
     private static final int SIZE = 12;
     
     protected Direction currentDirection;
-    private int stepSize = 3;
+    protected int stepSize;
 
     private BufferedImage image;
     protected int width;
@@ -111,6 +111,14 @@ public abstract class AbstractSprite {
         this.deltaY = deltaY;
     }
 
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
+
+    public void setCurrentDirection(Direction currentDirection) {
+        this.currentDirection = currentDirection;
+    }
+
     public Rectangle getMyRectangle() {
         return new Rectangle(this.x, this.y, this.width, this.height);
     }
@@ -133,7 +141,7 @@ public abstract class AbstractSprite {
         }
     }
 
-    public void moveTank(Direction direction) {
+    public void moveSprite(Direction direction) {
         switch (direction) {
             case EAST:
                 this.currentDirection = direction;
