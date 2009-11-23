@@ -36,20 +36,21 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_SPACE:
                 pressedKeys.add(keyCode);
                 break;
         }
 
-        this.setTankMovementState();
+        this.setMovementState();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         pressedKeys.remove(e.getKeyCode());
-        this.setTankMovementState();
+        this.setMovementState();
     }
 
-    public void setTankMovementState() {
+    public void setMovementState() {
         Direction direction = null;
         if (pressedKeys.isEmpty()) {
             direction = Direction.STOP;
@@ -68,6 +69,7 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
             boolean upPressed = false;
             boolean leftPressed = false;
             boolean rightPressed = false;
+            boolean firePressed = false;
             for (Integer pressedKey : pressedKeys) {
                 if (pressedKey == KeyEvent.VK_DOWN) {
                     downPressed = true;
@@ -77,6 +79,8 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
                     leftPressed = true;
                 } else if (pressedKey == KeyEvent.VK_RIGHT) {
                     rightPressed = true;
+                } else if (pressedKey == KeyEvent.VK_SPACE) {
+                    firePressed = true;
                 }
             }
 
@@ -97,9 +101,19 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
             } else if (rightPressed) {
                 direction = Direction.EAST;
             }
+
+            if (firePressed) {
+                this.notifyFire();
+            }
         }
 
         this.notifyDirectionChange(direction == null ? Direction.STOP : direction);
+    }
+
+    private void notifyFire() {
+        for (IListenForArrowDirection listener : listeners) {
+            listener.fire();
+        }
     }
 
     private void notifyStopXMovement() {

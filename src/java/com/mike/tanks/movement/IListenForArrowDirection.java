@@ -9,4 +9,5 @@ public interface IListenForArrowDirection {
     public void handleStopXMovement();
     public void handleStopYMovement();
     public void handleMovement(Direction direction);
+    public void fire();
 }
