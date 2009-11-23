@@ -39,9 +39,9 @@ public class TankPanel extends JPanel implements Runnable {
     private static final int PHEIGHT = 400;
 
     private Thread animator;
-    private volatile boolean running;
-    private volatile boolean gameOver;
-    private volatile boolean isPaused;
+    private boolean running;
+    private boolean gameOver;
+    private boolean isPaused;
     private Graphics dbg;
     private Image dbImage;
     private TankSprite player1Tank;
