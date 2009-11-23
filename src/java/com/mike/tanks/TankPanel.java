@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ConcurrentModificationException;
 
 import com.mike.tanks.sprites.TankSprite;
+import com.mike.tanks.sprites.BulletSprite;
 import com.mike.tanks.ImageLoader;
 import com.mike.tanks.Images;
 import com.mike.tanks.movement.Direction;
@@ -46,6 +48,7 @@ public class TankPanel extends JPanel implements Runnable {
     private Image dbImage;
     private TankSprite player1Tank;
     private ImageLoader imageLoader;
+    private List<BulletSprite> bullets;
 
     public TankPanel() {
         setBackground(Color.white);
@@ -58,6 +61,7 @@ public class TankPanel extends JPanel implements Runnable {
         movementKeyAdapter.addArrowDirectionListener(new TankMovement());
 
         this.imageLoader = new ImageLoader();
+        this.bullets = new ArrayList<BulletSprite>();
         this.player1Tank = new TankSprite(PWIDTH, PHEIGHT, this.imageLoader.getImage(Images.TANK.getImageName()));
     }
 
@@ -149,6 +153,14 @@ public class TankPanel extends JPanel implements Runnable {
         this.dbg.fillRect(0, 0, PWIDTH, PHEIGHT);
 
         this.player1Tank.drawSprite(this.dbg);
+        try {
+            for (BulletSprite bullet : bullets) {
+                bullet.drawSprite(this.dbg);
+            }
+        } catch (ConcurrentModificationException e) {
+            //ignore, too expensive to sync in the animation loop, just ignore
+        }
+
         if (this.gameOver) {
 
         }
@@ -158,6 +170,13 @@ public class TankPanel extends JPanel implements Runnable {
     private void gameUpdate() {
         if (!this.isPaused && !this.gameOver) {
             this.player1Tank.updateSprite();
+            try {
+                for (BulletSprite bullet : bullets) {
+                    bullet.updateSprite();
+                }
+            } catch (ConcurrentModificationException e) {
+                //ignore, too expensive to sync in the animation loop, just ignore
+            }
         }
     }
 
@@ -188,6 +207,11 @@ public class TankPanel extends JPanel implements Runnable {
         }
     }
 
+    private void tankFires() {
+        BulletSprite bullet = new BulletSprite(player1Tank.getX(), player1Tank.getY(), PWIDTH, PHEIGHT, null);
+        bullets.add(bullet);
+    }
+
     private class TankMovement implements IListenForArrowDirection {
         public void handleStopXMovement() {
             player1Tank.stopXMovement();
@@ -200,6 +224,10 @@ public class TankPanel extends JPanel implements Runnable {
 
         public void handleMovement(Direction direction) {
             player1Tank.moveTank(direction);
+        }
+
+        public void fire() {
+            tankFires();
         }
     }
 }

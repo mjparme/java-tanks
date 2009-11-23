@@ -1,5 +1,7 @@
 package com.mike.tanks.sprites;
 
+import com.mike.tanks.movement.Direction;
+
 import java.awt.*;
 import java.awt.image.*;
 
@@ -10,6 +12,9 @@ import java.awt.image.*;
  */
 public abstract class AbstractSprite {
     private static final int SIZE = 12;
+    
+    protected Direction currentDirection;
+    private int stepSize = 3;
 
     private BufferedImage image;
     protected int width;
@@ -30,12 +35,12 @@ public abstract class AbstractSprite {
         this.deltaY = 0;
     }
 
-    public AbstractSprite(int x, int y, int width, int height, BufferedImage image) {
+    public AbstractSprite(int x, int y, int gamePanelWidth, int gamePanelHeight, BufferedImage image) {
         this();
         this.x = x;
         this.y = y;
-        this.panelWidth = width;
-        this.panelHeight = height;
+        this.panelWidth = gamePanelWidth;
+        this.panelHeight = gamePanelHeight;
         this.setImage(image);
     }
 
@@ -74,9 +79,26 @@ public abstract class AbstractSprite {
         this.isActive = active;
     }
 
+    public void setPosition(Point point) {
+        this.x = point.x;
+        this.y = point.y;
+    }
+
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Point getPosition() {
+        return new Point(this.x, this.y);
     }
 
     public void translate(int xDist, int yDist) {
@@ -109,5 +131,79 @@ public abstract class AbstractSprite {
                 g.drawImage(this.image, this.x, this.y, null);
             }
         }
+    }
+
+    public void moveTank(Direction direction) {
+        switch (direction) {
+            case EAST:
+                this.currentDirection = direction;
+                this.moveSpriteEast();
+                break;
+            case NORTH:
+                this.currentDirection = direction;
+                this.moveSpriteNorth();
+                break;
+            case NORTH_EAST:
+                this.currentDirection = direction;
+                this.moveSpriteNorth();
+                this.moveSpriteEast();
+                break;
+            case NORTH_WEST:
+                this.currentDirection = direction;
+                this.moveSpriteNorth();
+                this.moveSpriteWest();
+                break;
+            case SOUTH:
+                this.currentDirection = direction;
+                this.moveSpriteSouth();
+                break;
+            case SOUTH_EAST:
+                this.currentDirection = direction;
+                this.moveSpriteSouth();
+                this.moveSpriteEast();
+                break;
+            case SOUTH_WEST:
+                this.currentDirection = direction;
+                this.moveSpriteSouth();
+                this.moveSpriteWest();
+                break;
+            case WEST:
+                this.currentDirection = direction;
+                this.moveSpriteWest();
+                break;
+            case NONE:
+            case STOP:
+                this.stopSprite();
+                break;
+        }
+    }
+
+    private void moveSpriteSouth() {
+        deltaY = stepSize;
+    }
+
+    private void moveSpriteNorth() {
+        deltaY = -stepSize;
+    }
+
+    private void moveSpriteWest() {
+        deltaX = -stepSize;
+    }
+
+    private void moveSpriteEast() {
+        deltaX = stepSize;
+    }
+
+    private void stopSprite() {
+        this.stopXMovement();
+        this.stopYMovement();
+    }
+
+    public void stopXMovement() {
+        deltaX = 0;
+    }
+
+    public void stopYMovement() {
+        deltaY = 0;
     }
 }
