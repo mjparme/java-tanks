@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/BulletSprite.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/BulletSprite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/AbstractSprite.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/AbstractSprite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="java-tanks.iws" />
@@ -60,7 +62,7 @@
       <file leaf-file-name="BulletSprite.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/BulletSprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="8" selection-start="126" selection-end="126" vertical-scroll-proportion="0.077922076">
+            <state line="39" column="29" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.53365386">
               <folding />
             </state>
           </provider>
@@ -449,7 +451,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="74" y="31" width="1480" height="897" extended-state="0" />
+    <frame x="0" y="22" width="1680" height="959" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
@@ -466,11 +468,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24231844" sideWeight="0.10335917" order="0" side_tool="false" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21262255" sideWeight="0.59090906" order="0" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8875969" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4007177" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
@@ -486,7 +488,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="directional firing" />
+    <option name="LAST_COMMIT_MESSAGE" value="need to set step before setting deltas...doh!" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -502,6 +504,7 @@
     <MESSAGE value="initial support for firing" />
     <MESSAGE value="removing legacy intellij project files (switched to directory based)" />
     <MESSAGE value="directional firing" />
+    <MESSAGE value="need to set step before setting deltas...doh!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -638,21 +641,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/movement/ArrowMovementKeyAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="1747" selection-end="1747" vertical-scroll-proportion="0.45192307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="143" selection-start="6369" selection-end="6369" vertical-scroll-proportion="0.8255578">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/TankSprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="16" selection-start="794" selection-end="794" vertical-scroll-proportion="0.73170733">
+        <state line="74" column="13" selection-start="2333" selection-end="2333" vertical-scroll-proportion="0.625">
           <folding />
         </state>
       </provider>
@@ -664,9 +653,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/TankSprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="16" selection-start="794" selection-end="794" vertical-scroll-proportion="0.73170733">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="219" column="48" selection-start="6655" selection-end="6655" vertical-scroll-proportion="1.0367347">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/BulletSprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="8" selection-start="126" selection-end="126" vertical-scroll-proportion="0.077922076">
+        <state line="39" column="29" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.53365386">
           <folding />
         </state>
       </provider>

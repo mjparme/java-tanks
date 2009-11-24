@@ -11,8 +11,6 @@ import java.awt.image.*;
  * http://fivedots.coe.psu.ac.th/~ad/jg/
  */
 public abstract class AbstractSprite {
-    private static final int SIZE = 12;
-    
     protected Direction currentDirection;
     protected int stepSize;
 
@@ -29,6 +27,7 @@ public abstract class AbstractSprite {
     protected int y;
     protected int deltaX;
     protected int deltaY;
+    protected int size;
 
     public AbstractSprite() {
         this.deltaX = 0;
@@ -46,8 +45,8 @@ public abstract class AbstractSprite {
 
     public void setImage(BufferedImage image) {
         if (image == null) {
-            this.width = SIZE;
-            this.height = SIZE;
+            this.width = size;
+            this.height = size;
         } else {
             this.image = image;
             this.width = this.image.getWidth();
@@ -119,6 +118,14 @@ public abstract class AbstractSprite {
         this.currentDirection = currentDirection;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public Rectangle getMyRectangle() {
         return new Rectangle(this.x, this.y, this.width, this.height);
     }
@@ -134,7 +141,7 @@ public abstract class AbstractSprite {
         if (this.isActive) {
             if (this.image == null) {
                 g.setColor(Color.BLACK);
-                g.fillOval(this.x, this.y, SIZE, SIZE);
+                g.fillOval(this.x, this.y, size, size);
             } else {
                 g.drawImage(this.image, this.x, this.y, null);
             }
