@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 import com.mike.tanks.sprites.TankSprite;
 import com.mike.tanks.sprites.BulletSprite;
@@ -47,6 +48,7 @@ public class TankPanel extends JPanel implements Runnable {
     private TankSprite player1Tank;
     private ImageLoader imageLoader;
     private List<BulletSprite> bullets;
+    private int maxNumOfBullets;
 
     public TankPanel() {
         setBackground(Color.white);
@@ -61,6 +63,7 @@ public class TankPanel extends JPanel implements Runnable {
         this.imageLoader = new ImageLoader();
         this.bullets = new ArrayList<BulletSprite>();
         this.player1Tank = new TankSprite(PWIDTH, PHEIGHT, this.imageLoader.getImage(Images.TANK.getImageName()));
+        this.maxNumOfBullets = 3;
     }
 
     public void addNotify() {
@@ -156,7 +159,7 @@ public class TankPanel extends JPanel implements Runnable {
                 bullet.drawSprite(this.dbg);
             }
         } catch (ConcurrentModificationException e) {
-            //ignore, too expensive to sync in the animation loop, just ignore
+            //too expensive to sync in the animation loop, just ignore
         }
 
         if (this.gameOver) {
@@ -169,11 +172,15 @@ public class TankPanel extends JPanel implements Runnable {
         if (!this.isPaused && !this.gameOver) {
             this.player1Tank.updateSprite();
             try {
-                for (BulletSprite bullet : bullets) {
+                for (Iterator<BulletSprite> it = bullets.iterator(); it.hasNext();) {
+                    BulletSprite bullet = it.next();
                     bullet.updateSprite();
+                    if (bullet.isExpired()) {
+                        it.remove();
+                    }
                 }
             } catch (ConcurrentModificationException e) {
-                //ignore, too expensive to sync in the animation loop, just ignore
+                //too expensive to sync in the animation loop, just ignore
             }
         }
     }
@@ -184,6 +191,10 @@ public class TankPanel extends JPanel implements Runnable {
 
     public void resumeGame() {
         this.isPaused = false;
+    }
+
+    public void setMaxNumOfBullets(int maxNumOfBullets) {
+        this.maxNumOfBullets = maxNumOfBullets;
     }
 
     private void paintScreen() {
@@ -206,8 +217,11 @@ public class TankPanel extends JPanel implements Runnable {
     }
 
     private void tankFires() {
-        BulletSprite bullet = new BulletSprite(player1Tank.getX(), player1Tank.getY(), PWIDTH, PHEIGHT, null, player1Tank.getCurrentDirection());
-        bullets.add(bullet);
+        if (!(bullets.size() >= maxNumOfBullets)) {
+            BulletSprite bullet = new BulletSprite(player1Tank.getX(), player1Tank.getY(), PWIDTH, PHEIGHT, null, player1Tank.getCurrentDirection());
+            bullet.setBouncesToLive(3);
+            bullets.add(bullet);
+        }
     }
 
     private class TankMovement implements IListenForArrowDirection {
