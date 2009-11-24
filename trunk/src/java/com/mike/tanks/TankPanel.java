@@ -218,7 +218,7 @@ public class TankPanel extends JPanel implements Runnable {
 
     private void tankFires() {
         if (!(bullets.size() >= maxNumOfBullets)) {
-            BulletSprite bullet = new BulletSprite(player1Tank.getX(), player1Tank.getY(), PWIDTH, PHEIGHT, null, player1Tank.getCurrentDirection());
+            BulletSprite bullet = new BulletSprite(player1Tank.getX() + player1Tank.getWidth() / 2, player1Tank.getY(), PWIDTH, PHEIGHT, null, player1Tank.getCurrentDirection());
             bullet.setBouncesToLive(3);
             bullets.add(bullet);
         }

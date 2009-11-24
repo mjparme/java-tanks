@@ -7,7 +7,7 @@ import java.awt.image.*;
 
 
 /**
- * This class was taken from Killer Game Programming in Java
+ * The concept and parts of this class was taken from Killer Game Programming in Java (Chapter 11)
  * http://fivedots.coe.psu.ac.th/~ad/jg/
  */
 public abstract class AbstractSprite {

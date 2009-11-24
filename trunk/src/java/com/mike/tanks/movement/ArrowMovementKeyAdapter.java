@@ -15,6 +15,8 @@ import java.awt.event.KeyAdapter;
 public class ArrowMovementKeyAdapter extends KeyAdapter {
     private Set<Integer> pressedKeys;
     private List<IListenForArrowDirection> listeners;
+    private long lastRelease;
+    private static long RELEASE_TIME = 50;
 
     public ArrowMovementKeyAdapter() {
         this.pressedKeys = new HashSet<Integer>();
@@ -46,7 +48,9 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        final long currentTime = System.currentTimeMillis();
         pressedKeys.remove(e.getKeyCode());
+        lastRelease = currentTime;
         this.setMovementState();
     }
 
@@ -107,7 +111,11 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
             }
         }
 
-        this.notifyDirectionChange(direction == null ? Direction.STOP : direction);
+        //If the last key release happened within a certain time don't set the state, this allows us to release two
+        //keys held down simultaneously without notifying on them both individually
+        if (System.currentTimeMillis() - lastRelease > RELEASE_TIME || direction == Direction.STOP) {
+            this.notifyDirectionChange(direction == null ? Direction.STOP : direction);
+        }
     }
 
     private void notifyFire() {
