@@ -9,27 +9,28 @@ import java.awt.image.BufferedImage;
  * Date: Nov 23, 2009
  * Time: 3:45:33 PM
  */
-public class BulletSprite extends AbstractSprite {
+public class Bullet extends AbstractSprite {
     private int bouncesToLive;
     private int bounces;
 
-    public BulletSprite(int x, int y, int gamePanelWidth, int gamePanelHeight, BufferedImage image, Direction startingDirection) {
+    public Bullet(int x, int y, int gamePanelWidth, int gamePanelHeight, BufferedImage image, Direction startingDirection) {
         super(x, y, gamePanelWidth, gamePanelHeight, image);
-        currentDirection = startingDirection;
+        spriteDirection = startingDirection;
         stepSize = 4;
-        size = 6;
-        moveSprite(startingDirection);
+        height = 6;
+        width = 6;
+        setSpriteDirection(startingDirection);
     }
 
     @Override
     public void updateSprite() {
-        if ((x <= 0 && deltaX < 0) || (x + width >= panelWidth && deltaX > 0)) {
-            deltaX = -deltaX;
+        if (goneOffScreenX()) {
+            reverseX();
             this.bounces++;
         }
 
-        if ((y <= 0 && deltaY < 0) || (y + height >= panelHeight && deltaY > 0)) {
-            deltaY = -deltaY;
+        if (goneOffScreenY()) {
+            reverseY();
             this.bounces++;
         }
 
@@ -38,6 +39,10 @@ public class BulletSprite extends AbstractSprite {
 
     public boolean isExpired() {
         return this.bounces > this.bouncesToLive;  
+    }
+
+    public void incrementBounces() {
+        this.bounces++;
     }
 
     public void setBouncesToLive(int bouncesToLive) {

@@ -5,7 +5,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/movement/ArrowMovementKeyAdapter.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/movement/ArrowMovementKeyAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/AbstractSprite.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/AbstractSprite.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/BulletSprite.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/Bullet.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/TankSprite.java" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/Tank.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/mike/tanks/sprites/Wall.java" />
     </list>
     <ignored path="java-tanks.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,10 +62,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ArrowMovementKeyAdapter.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/movement/ArrowMovementKeyAdapter.java">
+      <file leaf-file-name="TankPanel.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="98" selection-start="4101" selection-end="4101" vertical-scroll-proportion="0.8956522">
+            <state line="67" column="38" selection-start="2356" selection-end="2356" vertical-scroll-proportion="0.6666667">
               <folding />
             </state>
           </provider>
@@ -251,6 +254,11 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mike.tanks.sprites" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Tanks">
     <tempConfiguration default="false" name="Tanks" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
       <option name="MAIN_CLASS_NAME" value="com.mike.tanks.Tanks" />
@@ -437,20 +445,20 @@
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32945737" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39952153" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32945737" sideWeight="0.5" order="7" side_tool="false" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21262255" sideWeight="0.8301435" order="0" side_tool="false" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21262255" sideWeight="0.6722488" order="0" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16148326" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.319378" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
@@ -466,7 +474,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="limit bounces and number of bullets" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusting stop direction when moving at an angle" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -484,6 +492,7 @@
     <MESSAGE value="directional firing" />
     <MESSAGE value="need to set step before setting deltas...doh!" />
     <MESSAGE value="limit bounces and number of bullets" />
+    <MESSAGE value="adjusting stop direction when moving at an angle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -541,13 +550,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/templateLanguages.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/validation.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -611,16 +613,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/TankSprite.java">
+    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/movement/ArrowMovementKeyAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="16" selection-start="794" selection-end="794" vertical-scroll-proportion="0.73170733">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/BulletSprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="29" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.53365386">
+        <state line="87" column="0" selection-start="2857" selection-end="2857" vertical-scroll-proportion="0.008695652">
           <folding />
         </state>
       </provider>
@@ -632,23 +627,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/Wall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="18" selection-start="396" selection-end="396" vertical-scroll-proportion="0.1875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/Bullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="579" selection-end="579" vertical-scroll-proportion="0.66885245">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/Tank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="32" selection-start="507" selection-end="507" vertical-scroll-proportion="0.5508197">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/sprites/AbstractSprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="98" selection-start="224" selection-end="224" vertical-scroll-proportion="-1.4938775">
+        <state line="267" column="42" selection-start="6876" selection-end="6876" vertical-scroll-proportion="1.4759616">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/TankPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="148" selection-start="6807" selection-end="6807" vertical-scroll-proportion="0.9368421">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/mike/tanks/movement/ArrowMovementKeyAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="98" selection-start="4101" selection-end="4101" vertical-scroll-proportion="0.8956522">
+        <state line="67" column="38" selection-start="2356" selection-end="2356" vertical-scroll-proportion="0.6666667">
           <folding />
         </state>
       </provider>
