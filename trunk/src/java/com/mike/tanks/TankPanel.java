@@ -177,10 +177,10 @@ public class TankPanel extends JPanel implements Runnable {
 
     private void gameUpdate() {
         if (!this.isPaused && !this.gameOver) {
-            if (!player1Tank.willSpritesIntersect(this.walls)) {
-                this.player1Tank.updateSprite();
-            } else {
+            if (player1Tank.willSpritesIntersect(this.walls)) {
                 this.player1Tank.setSpriteDirection(Direction.STOP);
+            } else {
+                this.player1Tank.updateSprite();
             }
 
             try {
