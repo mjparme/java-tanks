@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-import com.mike.tanks.sprites.TankSprite;
-import com.mike.tanks.sprites.BulletSprite;
-import com.mike.tanks.ImageLoader;
-import com.mike.tanks.Images;
+import com.mike.tanks.sprites.Tank;
+import com.mike.tanks.sprites.Bullet;
+import com.mike.tanks.sprites.Wall;
 import com.mike.tanks.movement.Direction;
 import com.mike.tanks.movement.ArrowMovementKeyAdapter;
 import com.mike.tanks.movement.IListenForArrowDirection;
@@ -45,9 +44,10 @@ public class TankPanel extends JPanel implements Runnable {
     private boolean isPaused;
     private Graphics dbg;
     private Image dbImage;
-    private TankSprite player1Tank;
+    private Tank player1Tank;
     private ImageLoader imageLoader;
-    private List<BulletSprite> bullets;
+    private List<Bullet> bullets;
+    private List<Wall> walls;
     private int maxNumOfBullets;
 
     public TankPanel() {
@@ -61,8 +61,11 @@ public class TankPanel extends JPanel implements Runnable {
         movementKeyAdapter.addArrowDirectionListener(new TankMovement());
 
         this.imageLoader = new ImageLoader();
-        this.bullets = new ArrayList<BulletSprite>();
-        this.player1Tank = new TankSprite(PWIDTH, PHEIGHT, this.imageLoader.getImage(Images.TANK.getImageName()));
+        this.bullets = new ArrayList<Bullet>();
+        this.walls = new ArrayList<Wall>();
+        this.player1Tank = new Tank(PWIDTH, PHEIGHT, this.imageLoader.getImage(Images.TANK.getImageName()));
+        this.walls.add(new Wall(100, 100, PWIDTH, PHEIGHT, null));
+        this.walls.add(new Wall(300, 100, PWIDTH, PHEIGHT, null));
         this.maxNumOfBullets = 3;
     }
 
@@ -155,11 +158,15 @@ public class TankPanel extends JPanel implements Runnable {
 
         this.player1Tank.drawSprite(this.dbg);
         try {
-            for (BulletSprite bullet : bullets) {
+            for (Bullet bullet : this.bullets) {
                 bullet.drawSprite(this.dbg);
             }
         } catch (ConcurrentModificationException e) {
             //too expensive to sync in the animation loop, just ignore
+        }
+
+        for (Wall wall : walls) {
+            wall.drawSprite(this.dbg);
         }
 
         if (this.gameOver) {
@@ -170,13 +177,24 @@ public class TankPanel extends JPanel implements Runnable {
 
     private void gameUpdate() {
         if (!this.isPaused && !this.gameOver) {
-            this.player1Tank.updateSprite();
+            if (!player1Tank.willSpritesIntersect(this.walls)) {
+                this.player1Tank.updateSprite();
+            } else {
+                this.player1Tank.setSpriteDirection(Direction.STOP);
+            }
+
             try {
-                for (Iterator<BulletSprite> it = bullets.iterator(); it.hasNext();) {
-                    BulletSprite bullet = it.next();
+                for (Iterator<Bullet> it = this.bullets.iterator(); it.hasNext();) {
+                    Bullet bullet = it.next();
                     bullet.updateSprite();
                     if (bullet.isExpired()) {
                         it.remove();
+                    } else {
+                        if (bullet.spritesIntersect(this.walls)) {
+                            bullet.incrementBounces();
+                            bullet.reverseX();
+                            bullet.reverseY();
+                        }
                     }
                 }
             } catch (ConcurrentModificationException e) {
@@ -217,10 +235,11 @@ public class TankPanel extends JPanel implements Runnable {
     }
 
     private void tankFires() {
-        if (!(bullets.size() >= maxNumOfBullets)) {
-            BulletSprite bullet = new BulletSprite(player1Tank.getX() + player1Tank.getWidth() / 2, player1Tank.getY(), PWIDTH, PHEIGHT, null, player1Tank.getCurrentDirection());
+        if (!(this.bullets.size() >= this.maxNumOfBullets)) {
+            Point cannonLoc = this.player1Tank.getCannonLocation();
+            Bullet bullet = new Bullet(cannonLoc.x, cannonLoc.y, PWIDTH, PHEIGHT, null, this.player1Tank.getSpriteDirection());
             bullet.setBouncesToLive(3);
-            bullets.add(bullet);
+            this.bullets.add(bullet);
         }
     }
 
@@ -235,7 +254,7 @@ public class TankPanel extends JPanel implements Runnable {
         }
 
         public void handleMovement(Direction direction) {
-            player1Tank.moveSprite(direction);
+            player1Tank.setSpriteDirection(direction);
         }
 
         public void fire() {
