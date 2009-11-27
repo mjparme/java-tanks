@@ -46,7 +46,6 @@ public class ArrowMovementKeyAdapter extends KeyAdapter {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        final long currentTime = System.currentTimeMillis();
         pressedKeys.remove(e.getKeyCode());
         this.setMovementState();
     }

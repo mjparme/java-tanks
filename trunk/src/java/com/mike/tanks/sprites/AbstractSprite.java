@@ -176,44 +176,49 @@ public abstract class AbstractSprite {
      * Determines if this sprite intersects any of the sprites in the passed in List of sprites
      *
      * @param sprites a List of sprites to check this sprite for intersection with
-     * @return true if any of the sprites in the passed in List intersects this sprite, false otherwise
+     * @return the AbstractSprite this sprite intersects or null if none of the passed in sprites
+     *         intersect this sprite
      */
-    public boolean spritesIntersect(java.util.List<? extends AbstractSprite> sprites) {
-        boolean intersects = false;
+    public AbstractSprite spritesIntersect(java.util.List<? extends AbstractSprite> sprites) {
+        AbstractSprite intersectedSprite = null;
         for (AbstractSprite sprite : sprites) {
-            intersects = this.getMyRectangle().intersects(sprite.getMyRectangle());
+            boolean intersects = this.getMyRectangle().intersects(sprite.getMyRectangle());
             if (intersects) {
+                intersectedSprite = sprite;
                 break;
             }
         }
 
-        return intersects;
+        return intersectedSprite;
     }
 
     /**
-     * Determines if this sprite intersects any of the sprites in the passed in List of sprites
+     * Determines if this sprite will intersect any of the sprites in the passed in List of sprites, after the
+     * next update
      *
      * @param sprites a List of sprites to check this sprite for intersection with
-     * @return true if any of the sprites in the passed in List intersects this sprite, false otherwise
+     * @return the AbstractSprite this sprite will intersect or null if none of the passed in sprites
+     *         will intersect this sprite
      */
-    public boolean willSpritesIntersect(java.util.List<? extends AbstractSprite> sprites) {
-        boolean intersects = false;
+    public AbstractSprite willSpritesIntersect(java.util.List<? extends AbstractSprite> sprites) {
+        AbstractSprite intersectedSprite = null;
         for (AbstractSprite sprite : sprites) {
-            intersects = this.getLookAheadRectangle().intersects(sprite.getMyRectangle());
+            boolean intersects = this.getLookAheadRectangle().intersects(sprite.getMyRectangle());
             if (intersects) {
+                intersectedSprite = sprite;
                 break;
             }
         }
 
-        return intersects;
+        return intersectedSprite;
     }
 
 
     /**
-     * Determines if this sprite will intersect the passed in sprite after the next update
+     * Determines if this sprite intersects the passed in sprite
      *
      * @param sprite a sprite to check this sprite for intersection with
-     * @return true if the passed in sprite will intersect this sprite on the next update, false otherwise
+     * @return true if the passed in sprite intersects this sprite, false otherwise
      */
     public boolean spritesIntersect(AbstractSprite sprite) {
         return this.getMyRectangle().intersects(sprite.getMyRectangle());
