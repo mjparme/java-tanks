@@ -12,6 +12,7 @@ import java.util.Iterator;
 import com.mike.tanks.sprites.Tank;
 import com.mike.tanks.sprites.Bullet;
 import com.mike.tanks.sprites.Wall;
+import com.mike.tanks.sprites.AbstractSprite;
 import com.mike.tanks.movement.Direction;
 import com.mike.tanks.movement.ArrowMovementKeyAdapter;
 import com.mike.tanks.movement.IListenForArrowDirection;
@@ -177,10 +178,11 @@ public class TankPanel extends JPanel implements Runnable {
 
     private void gameUpdate() {
         if (!this.isPaused && !this.gameOver) {
-            if (player1Tank.willSpritesIntersect(this.walls)) {
-                this.player1Tank.setSpriteDirection(Direction.STOP);
-            } else {
+            AbstractSprite intersectedSprite = player1Tank.willSpritesIntersect(this.walls);
+            if (intersectedSprite == null) {
                 this.player1Tank.updateSprite();
+            } else {
+                this.player1Tank.setSpriteDirection(Direction.STOP);
             }
 
             try {
@@ -190,10 +192,26 @@ public class TankPanel extends JPanel implements Runnable {
                     if (bullet.isExpired()) {
                         it.remove();
                     } else {
-                        if (bullet.spritesIntersect(this.walls)) {
-                            bullet.incrementBounces();
-                            bullet.reverseX();
-                            bullet.reverseY();
+                        intersectedSprite = bullet.spritesIntersect(this.walls);
+                        if (intersectedSprite != null) {
+
+                            //We know this bullet intersects a wall, now we have to figure out if we hit the
+                            //top, bottom, left, or right wall. This determines bounce direction.
+                            final int leftEdge = intersectedSprite.getX();
+                            final int topEdge = intersectedSprite.getY();
+
+                            int bottomEdge = topEdge + intersectedSprite.getHeight();
+                            int rightEdge = leftEdge + intersectedSprite.getWidth();
+
+                            final int bulletY = bullet.getY();
+                            final int bulletX = bullet.getX();
+                            if ((bulletY >= topEdge || bulletY <= bottomEdge) && bulletX >= leftEdge && bulletX <= rightEdge) {
+                                bullet.incrementBounces();
+                                bullet.reverseY();
+                            } else if ((bulletX >= leftEdge || bulletX <= rightEdge) && bulletY >= topEdge && bulletY <= bottomEdge) {
+                                bullet.incrementBounces();
+                                bullet.reverseX();
+                            }
                         }
                     }
                 }
