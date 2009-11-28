@@ -10,6 +10,11 @@ import java.awt.geom.Line2D;
  * Time: 10:32:35 AM
  */
 public class Wall extends AbstractSprite {
+    private Line2D.Double topEdgeLine;
+    private Line2D.Double bottomEdgeLine;
+    private Line2D.Double leftEdgeLine;
+    private Line2D.Double rightEdgeLine;
+
     public Wall(int x, int y, int gamePanelWidth, int gamePanelHeight, BufferedImage image) {
         super(x, y, gamePanelWidth, gamePanelHeight, image);
         stepSize = 0;
@@ -31,18 +36,34 @@ public class Wall extends AbstractSprite {
     }
 
     public Line2D getTopEdgeLine() {
-        return new Line2D.Double(x, y, x + width, y);
+        if (this.topEdgeLine == null) {
+            this.topEdgeLine = new Line2D.Double(x, y, x + width, y);
+        }
+
+        return this.topEdgeLine;
     }
 
     public Line2D getBottomEdgeLine() {
-        return new Line2D.Double(x, y + height, x + width, y + height);
+        if (this.bottomEdgeLine == null) {
+            this.bottomEdgeLine = new Line2D.Double(x, y + height, x + width, y + height);
+        }
+
+        return this.bottomEdgeLine;
     }
 
     public Line2D getLeftEdgeLine() {
-        return new Line2D.Double(x, y, x, y + height);
+        if (leftEdgeLine == null) {
+            leftEdgeLine = new Line2D.Double(x, y, x, y + height);
+        }
+
+        return leftEdgeLine;
     }
 
     public Line2D getRightEdgeLine() {
-        return new Line2D.Double(x + width, y, x + width, y + height);
+        if (rightEdgeLine == null) {
+            rightEdgeLine = new Line2D.Double(x + width, y, x + width, y + height);
+        }
+        
+        return rightEdgeLine;
     }
 }
