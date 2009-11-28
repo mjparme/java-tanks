@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ConcurrentModificationException;
@@ -192,23 +193,24 @@ public class TankPanel extends JPanel implements Runnable {
                     if (bullet.isExpired()) {
                         it.remove();
                     } else {
-                        intersectedSprite = bullet.spritesIntersect(this.walls);
-                        if (intersectedSprite != null) {
+                        //Check the bullet to see if it intersects any edge of any wall
+                        for (Wall wall : walls) {
+                            Line2D topEdge = wall.getTopEdgeLine();
+                            Line2D bottomEdge = wall.getBottomEdgeLine();
+                            Line2D leftEdge = wall.getLeftEdgeLine();
+                            Line2D rightEdge = wall.getRightEdgeLine();
 
-                            //We know this bullet intersects a wall, now we have to figure out if we hit the
-                            //top, bottom, left, or right wall. This determines bounce direction.
-                            final int leftEdge = intersectedSprite.getX();
-                            final int topEdge = intersectedSprite.getY();
-
-                            int bottomEdge = topEdge + intersectedSprite.getHeight();
-                            int rightEdge = leftEdge + intersectedSprite.getWidth();
-
-                            final int bulletY = bullet.getY();
-                            final int bulletX = bullet.getX();
-                            if ((bulletY >= topEdge || bulletY <= bottomEdge) && bulletX >= leftEdge && bulletX <= rightEdge) {
+                            final Rectangle bulletRectangle = bullet.getMyRectangle();
+                            if (topEdge.intersects(bulletRectangle)) {
                                 bullet.incrementBounces();
                                 bullet.reverseY();
-                            } else if ((bulletX >= leftEdge || bulletX <= rightEdge) && bulletY >= topEdge && bulletY <= bottomEdge) {
+                            } else if (bottomEdge.intersects(bulletRectangle)) {
+                                bullet.incrementBounces();
+                                bullet.reverseY();
+                            } else if (leftEdge.intersects(bulletRectangle)) {
+                                bullet.incrementBounces();
+                                bullet.reverseX();
+                            } else if (rightEdge.intersects(bulletRectangle)) {
                                 bullet.incrementBounces();
                                 bullet.reverseX();
                             }

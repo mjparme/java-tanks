@@ -42,7 +42,6 @@ public class Bullet extends AbstractSprite {
     }
 
     public void incrementBounces() {
-        System.out.println("incrementing bounce: " + this.bounces);
         this.bounces++;
     }
 
