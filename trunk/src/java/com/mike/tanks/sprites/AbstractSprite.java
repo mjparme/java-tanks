@@ -96,6 +96,14 @@ public abstract class AbstractSprite {
         return new Point(this.x, this.y);
     }
 
+    public int getDeltaX() {
+        return deltaX;
+    }
+
+    public int getDeltaY() {
+        return deltaY;
+    }
+
     public void translate(int xDist, int yDist) {
         this.x += xDist;
         this.y += yDist;

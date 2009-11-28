@@ -2,6 +2,7 @@ package com.mike.tanks.sprites;
 
 import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.awt.geom.Line2D;
 
 /**
  * User: mjparme
@@ -27,5 +28,21 @@ public class Wall extends AbstractSprite {
     @Override
     public void updateSprite() {
         //Sprite is stationary, don't update
+    }
+
+    public Line2D getTopEdgeLine() {
+        return new Line2D.Double(x, y, x + width, y);
+    }
+
+    public Line2D getBottomEdgeLine() {
+        return new Line2D.Double(x, y + height, x + width, y + height);
+    }
+
+    public Line2D getLeftEdgeLine() {
+        return new Line2D.Double(x, y, x, y + height);
+    }
+
+    public Line2D getRightEdgeLine() {
+        return new Line2D.Double(x + width, y, x + width, y + height);
     }
 }
